@@ -14,7 +14,7 @@ class Vehicle{
 
     public:
 
-    Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop);
+    Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop, int VRun);
 
     void PrintVehicleInfo();
 

@@ -13,7 +13,7 @@ int main(){
     Driver D1("Vadim", 45, 20, 5);
     D1.PrintDriverInfo();
 
-    Vehicle V1(11, "minivan", "Citroen", "Kyiv", "Krakiv");
+    Vehicle V1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
     V1.PrintVehicleInfo();
     return 0;
 }

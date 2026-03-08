@@ -9,13 +9,15 @@ void Vehicle::PrintVehicleInfo(){
         std::cout << "Brand: " << brand << std::endl;
         std::cout << "First Stop: " << FirstStop << std::endl;
         std::cout << "Last Stop: " << LastStop << std::endl;
+        std::cout << "Run: " << run << std::endl;
         std::cout << "===================================" << std::endl;
     }
 
-Vehicle::Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop){
+Vehicle::Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop, int VRun){
     id = VId;
     model = VModel;
     brand = VBrand;
     FirstStop = VFirstStop;
     LastStop = VLastStop;
+    run = VRun;
 }

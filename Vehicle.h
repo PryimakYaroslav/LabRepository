@@ -12,6 +12,12 @@ class Vehicle{
     std::string LastStop;
     int run;
 
+    public:
+
+    Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop);
+
+    void PrintVehicleInfo();
+
 };
 
 #endif

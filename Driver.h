@@ -10,6 +10,11 @@ class Driver{
     int seniority;
     int fineCount;
 
+    public:
+    Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
+
+    void PrintDriverInfo();
+
 };
 
 #endif

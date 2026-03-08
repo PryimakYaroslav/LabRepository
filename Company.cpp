@@ -11,9 +11,28 @@ void Company::PrintCompanyInfo(){
         std::cout << "===================================" << std::endl;
     }
 
+void Company::SetRating(double Rating){
+    if (Rating >= 5) 
+    CompanyRating = 4.3;
+    else if (Rating < 0)
+    CompanyRating = 2.5;
+    else
+    CompanyRating = Rating;
+}
+
+void Company::IncreasRating(){
+    SetRating(CompanyRating +0.5);
+}
+
+void Company::UptadeTransport(){
+    DriverCount = DriverCount + 7;
+    VehicleCount = VehicleCount - 4;
+}
+
 Company::Company(std::string CName, int VCount, int DCount, double Rating) {
     CompanyName = CName;
     VehicleCount = VCount;
     DriverCount = DCount;
-    CompanyRating = Rating;
+    
+    SetRating(Rating);
 }

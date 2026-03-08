@@ -13,6 +13,7 @@ class Driver{
     public:
     Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
 
+    void UpdateDriverData();
     void PrintDriverInfo();
 
 };

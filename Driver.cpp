@@ -11,6 +11,12 @@ void Driver::PrintDriverInfo(){
         std::cout << "===================================" << std::endl;
 }
 
+void Driver::UpdateDriverData(){
+    age = age + 5;
+    seniority = seniority - 7;
+    fineCount = fineCount +1;
+}
+
 Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount) {
     name = DName;
     age = DAge;

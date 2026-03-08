@@ -14,6 +14,9 @@ class Company{
     Company(std::string CName, int VCount, int DCount, double Rating);
 
     void PrintCompanyInfo();
+    void SetRating(double Rating);
+    void IncreasRating();
+    void UptadeTransport();
 
 };
 

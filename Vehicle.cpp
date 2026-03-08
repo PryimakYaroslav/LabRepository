@@ -1,6 +1,7 @@
 #include "Vehicle.h"
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 void Vehicle::PrintVehicleInfo(){
         std::cout << "===================================" << std::endl;
@@ -12,6 +13,14 @@ void Vehicle::PrintVehicleInfo(){
         std::cout << "Run: " << run << std::endl;
         std::cout << "===================================" << std::endl;
     }
+
+void Vehicle::IncreasRun(){
+    run = run + 40000;
+}
+
+void Vehicle::SwapStops(){
+        std::swap(FirstStop, LastStop);
+}
 
 Vehicle::Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop, int VRun){
     id = VId;

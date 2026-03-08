@@ -2,6 +2,32 @@
 #include <iostream>
 #include <string>
 
+Company::Company() {
+    CompanyName = "Unkown";
+    VehicleCount = 0;
+    DriverCount = 0;
+    CompanyRating = 0;
+}
+
+Company::Company(std::string CName) {
+    CompanyName = CName;
+    VehicleCount = 0;
+    DriverCount = 0;
+    CompanyRating = 0;
+}
+
+Company::Company(std::string CName, int VCount, int DCount, double Rating) {
+    CompanyName = CName;
+    VehicleCount = VCount;
+    DriverCount = DCount;
+    
+    SetRating(Rating);
+}
+
+Company::~Company() {
+        std::cout << "Info about company " << CompanyName << " destroyed" << std::endl;
+}
+
 void Company::PrintCompanyInfo(){
         std::cout << "===================================" << std::endl;
         std::cout << "Company Name: " << CompanyName << std::endl;
@@ -27,12 +53,7 @@ void Company::IncreasRating(){
 void Company::UptadeTransport(){
     DriverCount = DriverCount + 7;
     VehicleCount = VehicleCount - 4;
-}
 
-Company::Company(std::string CName, int VCount, int DCount, double Rating) {
-    CompanyName = CName;
-    VehicleCount = VCount;
-    DriverCount = DCount;
-    
-    SetRating(Rating);
+    if (VehicleCount < 0)
+    VehicleCount = 0;
 }

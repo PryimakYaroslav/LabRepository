@@ -11,7 +11,10 @@ class Driver{
     int fineCount;
 
     public:
+    Driver();
+    Driver(std::string DName, int DAge);
     Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
+    ~Driver();
 
     void UpdateDriverData();
     void PrintDriverInfo();

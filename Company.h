@@ -11,8 +11,12 @@ class Company{
     double CompanyRating;
 
     public:
-    Company(std::string CName, int VCount, int DCount, double Rating);
 
+    Company();
+    Company(std::string CName);
+    Company(std::string CName, int VCount, int DCount, double Rating);
+    ~Company();
+    
     void PrintCompanyInfo();
     void SetRating(double Rating);
     void IncreasRating();

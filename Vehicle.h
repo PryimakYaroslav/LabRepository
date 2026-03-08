@@ -14,7 +14,10 @@ class Vehicle{
 
     public:
 
+    Vehicle();
+    Vehicle(int VId, std::string VModel, std::string VBrand);
     Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop, int VRun);
+    ~Vehicle();
 
     void IncreasRun();
     void SwapStops();

@@ -2,26 +2,15 @@
 #include <iostream>
 #include <string>
 
-Driver::Driver() {
-    name = "Unknown";
-    age = 0;
-    seniority = 0;
-    fineCount = 0;
-}
+Driver::Driver() : Driver("Unknown", 0, 0, 0) {}
 
-Driver::Driver(std::string DName, int DAge) {
-    name = DName;
-    age = DAge;
-    seniority = 0;
-    fineCount = 0;
-}
+Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0) {}
 
-Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount) {
-    name = DName;
-    age = DAge;
-    seniority = Dseniority;
-    fineCount = DfineCount;
-}
+Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount) :
+    name(DName),
+    age(DAge),
+    seniority(Dseniority),
+    fineCount(DfineCount) {}
 
 Driver::~Driver() {
         std::cout << "Info about driver " << name << " destroyed" << std::endl;

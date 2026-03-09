@@ -1,7 +1,7 @@
-#ifndef DRIVER_H
-#define DRIVER_H
+#pragma once
 
 #include <string>
+#include <iostream>
 
 class Driver{
 
@@ -20,5 +20,3 @@ class Driver{
     void PrintDriverInfo();
 
 };
-
-#endif

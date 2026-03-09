@@ -1,7 +1,7 @@
-#ifndef COMPANY_H
-#define COMPANY_H
+#pragma once
 
 #include <string>
+#include <iostream>
 
 class Company{
 
@@ -23,5 +23,3 @@ class Company{
     void UptadeTransport();
 
 };
-
-#endif

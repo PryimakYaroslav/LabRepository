@@ -3,32 +3,18 @@
 #include <string>
 #include <algorithm>
 
-Vehicle::Vehicle(){
-    id = 0;
-    model = "Unknown";
-    brand = "Unknown";
-    FirstStop = "None";
-    LastStop = "None";
-    run = 0;
-}
+Vehicle::Vehicle() : Vehicle(0, "Unknown", "Unknown", "None", "None", 0) {}
 
-Vehicle::Vehicle(int VId, std::string VModel, std::string VBrand){
-    id = VId;
-    model = VModel;
-    brand = VBrand;
-    FirstStop = "None";
-    LastStop = "None";
-    run = 0;
-}
+Vehicle::Vehicle(int id, std::string model, std::string brand) 
+    : Vehicle(id, model, brand, "None", "None", 0) {} 
 
-Vehicle::Vehicle(int VId, std::string VModel, std::string VBrand, std::string VFirstStop, std::string VLastStop, int VRun){
-    id = VId;
-    model = VModel;
-    brand = VBrand;
-    FirstStop = VFirstStop;
-    LastStop = VLastStop;
-    run = VRun;
-}
+Vehicle::Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, int run) : 
+    id(id), 
+    model(model), 
+    brand(brand), 
+    FirstStop(FirstStop), 
+    LastStop(LastStop), 
+    run(run) {}
 
 Vehicle::~Vehicle(){
         std::cout << "Info about vehicle " << id << " destroyed" << std::endl;

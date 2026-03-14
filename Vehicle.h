@@ -10,12 +10,12 @@ class Vehicle{
     std::string brand;
     std::string FirstStop;
     std::string LastStop;
-    int run;
+    long run;
 
     public:
     Vehicle();
     Vehicle(int id, std::string model, std::string brand);
-    Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, int run);
+    Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, long run);
     ~Vehicle();
 
     void IncreasRun();

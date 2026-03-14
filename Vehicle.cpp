@@ -8,7 +8,7 @@ Vehicle::Vehicle() : Vehicle(0, "Unknown", "Unknown", "None", "None", 0) {}
 Vehicle::Vehicle(int id, std::string model, std::string brand) 
     : Vehicle(id, model, brand, "None", "None", 0) {} 
 
-Vehicle::Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, int run) : 
+Vehicle::Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, long run) : 
     id(id), 
     model(model), 
     brand(brand), 

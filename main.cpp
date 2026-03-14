@@ -7,19 +7,19 @@
 using namespace std;
 
 int main(){
-    Company C1("TourUa", 30, 35, 4.2);
-    C1.IncreasRating();
-    C1.UptadeTransport();
-    C1.PrintCompanyInfo();
+    Company Company1("TourUa", 30, 35, 4.2);
+    Company1.IncreasRating();
+    Company1.UptadeTransport();
+    Company1.PrintCompanyInfo();
 
-    Driver D1("Vadim", 45, 20, 5);
-    D1.UpdateDriverData();
-    D1.PrintDriverInfo();
+    Driver Driver1("Vadim", 45, 20, 5);
+    Driver1.UpdateDriverData();
+    Driver1.PrintDriverInfo();
 
-    Vehicle V1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
-    V1.IncreasRun();
-    V1.SwapStops();
-    V1.PrintVehicleInfo();
+    Vehicle Vehicle1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
+    Vehicle1.IncreasRun();
+    Vehicle1.SwapStops();
+    Vehicle1.PrintVehicleInfo();
 
     return 0;
 }

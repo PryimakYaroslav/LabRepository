@@ -9,10 +9,8 @@ Company::Company(std::string CName) : Company (CName, 0, 0, 0) {}
 Company::Company(std::string CName, int VCount, int DCount, double Rating) :
      CompanyName(CName),
       VehicleCount(VCount),
-      DriverCount(DCount)
-{
-    SetRating(Rating);
-}
+      DriverCount(DCount),
+      CompanyRating(Rating) {}
 
 Company::~Company() {
         std::cout << "Info about company " << CompanyName << " destroyed" << std::endl;
@@ -37,7 +35,7 @@ void Company::SetRating(double Rating){
 }
 
 void Company::IncreasRating(){
-    SetRating(CompanyRating +0.5);
+    CompanyRating = CompanyRating + 0.5;
 }
 
 void Company::UptadeTransport(){

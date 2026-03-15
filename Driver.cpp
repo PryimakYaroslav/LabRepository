@@ -29,12 +29,12 @@ void Driver::PrintDriverInfo() const{
 }
 
 void Driver::UpdateDriverData(){
-    age = age + 5;
-    seniority = seniority - 7;
-    fineCount = fineCount +1;
+    this -> age + 5;
+    this -> seniority -= 7;
+    this -> fineCount += 1;
 
-    if (seniority < 0)
-    seniority = 0;
+    if (this -> seniority < 0)
+    this -> seniority = 0;
 }
 
 std::string Driver::GetDriverCategory(){

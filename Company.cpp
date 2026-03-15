@@ -10,10 +10,10 @@ Company::Company() : Company ("Unknown", 0, 0, 0) {}
 Company::Company(std::string CName) : Company (CName, 0, 0, 0) {}
 
 Company::Company(std::string CName, int VCount, int DCount, double Rating) :
-     CompanyName(CName),
-      VehicleCount(VCount),
-      DriverCount(DCount),
-      CompanyRating(Rating) {}
+    CompanyName(CName),
+    VehicleCount(VCount),
+    DriverCount(DCount),
+    CompanyRating(Rating) {}
 
 Company::~Company() {
         std::cout << "Info about company " << CompanyName << " destroyed" << std::endl;
@@ -42,11 +42,11 @@ void Company::IncreasRating(){
 }
 
 void Company::UptadeTransport(){
-    DriverCount = DriverCount + 7;
-    VehicleCount = VehicleCount - 4;
+    this -> DriverCount += 7;
+    this -> VehicleCount -= 4;
 
-    if (VehicleCount < 0)
-    VehicleCount = 0;
+    if (this -> VehicleCount < 0)
+    this -> VehicleCount = 0;
 }
 
 std::string Company::GetOfficeLocation(){

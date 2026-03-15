@@ -19,6 +19,9 @@ class Driver{
     Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
     ~Driver();
 
+    friend std::ostream& operator<<(std::ostream& os, const Driver& d);
+    friend std::istream& operator>>(std::istream& is, Driver& d);
+
     void UpdateDriverData();
     void PrintDriverInfo() const;
 

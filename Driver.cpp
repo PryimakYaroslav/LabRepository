@@ -19,13 +19,29 @@ Driver::~Driver() {
         std::cout << "Info about driver " << name << " destroyed" << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& os, const Driver& d) {
+    os << "===================================" << std::endl;
+    os << "Driver Name: " << d.name << std::endl;
+    os << "Driver age: " << d.age << " years" << std::endl;
+    os << "Driver seniority: " << d.seniority << " years" << std::endl;
+    os << "Fine Count: " << d.fineCount << std::endl;
+    os << "Category: " << Driver::DriverCategory << std::endl;
+    os << "===================================";
+
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Driver& d) {
+    std::cout << "Enter Driver Name: "; is >> d.name;
+    std::cout << "Enter Age: "; is >> d.age;
+    std::cout << "Enter Seniority: "; is >> d.seniority;
+    std::cout << "Enter Fines: "; is >> d.fineCount;
+
+    return is;
+}
+
 void Driver::PrintDriverInfo() const{
-    std::cout << "===================================" << std::endl;
-        std::cout << "Driver Name: " << name << std::endl;
-        std::cout << "Driver age: " << age << " years"<<std::endl;
-        std::cout << "Driver seniority: " << seniority << " years" << std::endl;
-        std::cout << "Fine Count: " << fineCount << std::endl;
-        std::cout << "===================================" << std::endl;
+   std::cout << *this << std::endl;
 }
 
 void Driver::UpdateDriverData(){

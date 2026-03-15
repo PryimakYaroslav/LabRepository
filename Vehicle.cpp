@@ -26,7 +26,7 @@ Vehicle::~Vehicle(){
         std::cout << "Info about vehicle " << id << " destroyed" << std::endl;
 }
 
-void Vehicle::PrintVehicleInfo(){
+void Vehicle::PrintVehicleInfo() const{
         std::cout << "===================================" << std::endl;
         std::cout << "Vehicle ID: " << id << std::endl;
         std::cout << "Model: " << model << std::endl;

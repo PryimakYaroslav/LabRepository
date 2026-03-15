@@ -19,7 +19,7 @@ Driver::~Driver() {
         std::cout << "Info about driver " << name << " destroyed" << std::endl;
 }
 
-void Driver::PrintDriverInfo(){
+void Driver::PrintDriverInfo() const{
     std::cout << "===================================" << std::endl;
         std::cout << "Driver Name: " << name << std::endl;
         std::cout << "Driver age: " << age << " years"<<std::endl;

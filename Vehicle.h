@@ -22,7 +22,7 @@ class Vehicle{
 
     void IncreasRun();
     void SwapStops();
-    void PrintVehicleInfo();
+    void PrintVehicleInfo() const;
     static std::string GetLocation();
     static int GetTotalVehicles();
 };

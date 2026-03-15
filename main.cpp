@@ -16,10 +16,16 @@ int main(){
     Driver1.UpdateDriverData();
     Driver1.PrintDriverInfo();
 
+    const Driver archiveDriver("Petro", 40, 17, 3);
+    archiveDriver.PrintDriverInfo();
+
     Vehicle Vehicle1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
     Vehicle1.IncreasRun();
     Vehicle1.SwapStops();
     Vehicle1.PrintVehicleInfo();
+
+    const Vehicle WrittenOffVehicle(3, "bus", "Mercedes", "Kyiv", "Krakiv", 1000000);
+    WrittenOffVehicle.PrintVehicleInfo();
 
     std::cout << Vehicle::GetLocation() << std::endl;
     std::cout << "Vehicle created: " << Vehicle::GetTotalVehicles() << std::endl;

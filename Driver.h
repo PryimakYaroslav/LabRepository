@@ -20,7 +20,7 @@ class Driver{
     ~Driver();
 
     void UpdateDriverData();
-    void PrintDriverInfo();
+    void PrintDriverInfo() const;
 
     static std::string GetDriverCategory();
     static int GetAvarageSalary();

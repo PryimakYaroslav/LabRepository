@@ -10,6 +10,9 @@ class Driver{
     int seniority;
     int fineCount;
 
+    static std::string DriverCategory;
+    static int AvarageSalary;
+
     public:
     Driver();
     Driver(std::string DName, int DAge);
@@ -19,4 +22,6 @@ class Driver{
     void UpdateDriverData();
     void PrintDriverInfo();
 
+    static std::string GetDriverCategory();
+    static int GetAvarageSalary();
 };

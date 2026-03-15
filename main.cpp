@@ -12,9 +12,6 @@ int main(){
     Company1.UptadeTransport();
     Company1.PrintCompanyInfo();
 
-    Company Company2("KyivDrive", 20, 25, 3.7);
-    Company2.PrintCompanyInfo();
-
     Driver Driver1("Vadim", 45, 20, 5);
     Driver1.UpdateDriverData();
     Driver1.PrintDriverInfo();
@@ -29,6 +26,9 @@ int main(){
 
     std::cout << Company::GetOfficeLocation() << std::endl;
     std::cout << Company::GetParentCorporation() << std::endl;
+
+    std::cout << Driver::GetDriverCategory() << std::endl;
+    std::cout << "Avarage driver salary: " << Driver::GetAvarageSalary() << " USD" << std::endl;
 
     return 0;
 }

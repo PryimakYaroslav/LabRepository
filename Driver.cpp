@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
+std::string Driver::DriverCategory = "D";
+int Driver::AvarageSalary = 1100;
+
 Driver::Driver() : Driver("Unknown", 0, 0, 0) {}
 
 Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0) {}
@@ -32,4 +35,12 @@ void Driver::UpdateDriverData(){
 
     if (seniority < 0)
     seniority = 0;
+}
+
+std::string Driver::GetDriverCategory(){
+    return "All drivers have license category " + DriverCategory;
+}
+
+int Driver::GetAvarageSalary(){
+    return AvarageSalary;
 }

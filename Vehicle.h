@@ -20,6 +20,8 @@ class Vehicle{
     Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, long run);
     ~Vehicle();
 
+    Vehicle(const Vehicle& other);
+
     void IncreasRun();
     void SwapStops();
     void PrintVehicleInfo() const;

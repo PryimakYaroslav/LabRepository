@@ -27,8 +27,10 @@ int main(){
     const Vehicle WrittenOffVehicle(3, "bus", "Mercedes", "Kyiv", "Krakiv", 1000000);
     WrittenOffVehicle.PrintVehicleInfo();
 
+    Vehicle Vehicle2 = Vehicle1;
+
     std::cout << Vehicle::GetLocation() << std::endl;
-    std::cout << "Vehicle created: " << Vehicle::GetTotalVehicles() << std::endl;
+    std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
 
     std::cout << Company::GetOfficeLocation() << std::endl;
     std::cout << Company::GetParentCorporation() << std::endl;

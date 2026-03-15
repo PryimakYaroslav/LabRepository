@@ -38,6 +38,18 @@ void Vehicle::PrintVehicleInfo() const{
         std::cout << "===================================" << std::endl;
     }
 
+Vehicle::Vehicle(const Vehicle& other) :
+    id(other.id),
+    model(other.model),
+    brand(other.brand),
+    FirstStop(other.FirstStop),
+    LastStop(other.LastStop),
+    run(other.run)
+{
+    totalVehicles++;
+    std::cout << "Vehicle vopy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
+}
+
 void Vehicle::IncreasRun(){
     run = run + 40000;
 }

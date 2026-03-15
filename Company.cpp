@@ -19,13 +19,28 @@ Company::~Company() {
         std::cout << "Info about company " << CompanyName << " destroyed" << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& os, const Company& c) {
+    os << "===================================" << std::endl;
+    os << "Company Name: " << c.CompanyName << std::endl;
+    os << "Vehicle Count: " << c.VehicleCount << " vehicles" << std::endl;
+    os << "Driver Count: " << c.DriverCount << " workers" << std::endl;
+    os << "Rating: " << c.CompanyRating << std::endl;
+    os << "===================================";
+    
+    return os; 
+}
+
+std::istream& operator>>(std::istream& is, Company& c) {
+    std::cout << "Enter Company Name: "; is >> c.CompanyName;
+    std::cout << "Enter Vehicle Count: "; is >> c.VehicleCount;
+    std::cout << "Enter Driver Count: "; is >> c.DriverCount;
+    std::cout << "Enter Rating: "; is >> c.CompanyRating;
+    
+    return is;
+}
+
 void Company::PrintCompanyInfo(){
-        std::cout << "===================================" << std::endl;
-        std::cout << "Company Name: " << CompanyName << std::endl;
-        std::cout << "Vehicle Count: " << VehicleCount << " vehicles"<<std::endl;
-        std::cout << "Driver Count: " << DriverCount << " workers" << std::endl;
-        std::cout << "CompanyRating: " << CompanyRating << std::endl;
-        std::cout << "===================================" << std::endl;
+    std::cout << *this << std::endl;
     }
 
 void Company::SetRating(double Rating){

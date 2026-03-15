@@ -19,6 +19,9 @@ class Company{
     Company(std::string CName);
     Company(std::string CName, int VCount, int DCount, double Rating);
     ~Company();
+
+    friend std::ostream& operator<<(std::ostream& os, const Company& c);
+    friend std::istream& operator>>(std::istream& is, Company& c);
     
     void PrintCompanyInfo();
     void SetRating(double Rating);

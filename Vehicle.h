@@ -18,9 +18,11 @@ class Vehicle{
     Vehicle();
     Vehicle(int id, std::string model, std::string brand);
     Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, long run);
+    Vehicle(const Vehicle& other);
     ~Vehicle();
 
-    Vehicle(const Vehicle& other);
+    friend std::ostream& operator<<(std::ostream& os, const Vehicle& v);
+    friend std::istream& operator>>(std::istream& is, Vehicle& v);
 
     void IncreasRun();
     void SwapStops();

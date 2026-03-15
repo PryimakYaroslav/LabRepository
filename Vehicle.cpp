@@ -26,16 +26,31 @@ Vehicle::~Vehicle(){
         std::cout << "Info about vehicle " << id << " destroyed" << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& os, const Vehicle& v){
+    os << "===================================" << std::endl;
+    os << "Vehicle ID: " << v.id << std::endl;
+    os << "Model: " << v.model << std::endl;
+    os << "Brand: " << v.brand << std::endl;
+    os << "First Stop: " << v.FirstStop << std::endl;
+    os << "Last Stop: " << v.LastStop << std::endl;
+    os << "Run: " << v.run << std::endl;
+    os << "Location: " << v.location << std::endl; 
+    os << "===================================" << std::endl; 
+
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Vehicle& v) {
+    std::cout << "Enter ID: "; is >> v.id;
+    std::cout << "Enter Model: "; is >> v.model;
+    std::cout << "Enter Brand: "; is >> v.brand;
+    std::cout << "Enter Run: "; is >> v.run;
+    
+    return is;
+}
+
 void Vehicle::PrintVehicleInfo() const{
-        std::cout << "===================================" << std::endl;
-        std::cout << "Vehicle ID: " << id << std::endl;
-        std::cout << "Model: " << model << std::endl;
-        std::cout << "Brand: " << brand << std::endl;
-        std::cout << "First Stop: " << FirstStop << std::endl;
-        std::cout << "Last Stop: " << LastStop << std::endl;
-        std::cout << "Run: " << run << std::endl;
-        std::cout << "Location: " << location << std::endl; 
-        std::cout << "===================================" << std::endl;
+        std::cout << *this << std::endl;
     }
 
 Vehicle::Vehicle(const Vehicle& other) :

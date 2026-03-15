@@ -11,6 +11,8 @@ class Vehicle{
     std::string FirstStop;
     std::string LastStop;
     long run;
+    static std::string location;
+    static int totalVehicles;
 
     public:
     Vehicle();
@@ -21,5 +23,6 @@ class Vehicle{
     void IncreasRun();
     void SwapStops();
     void PrintVehicleInfo();
-
+    static std::string GetLocation();
+    static int GetTotalVehicles();
 };

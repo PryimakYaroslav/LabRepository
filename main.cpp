@@ -21,5 +21,8 @@ int main(){
     Vehicle1.SwapStops();
     Vehicle1.PrintVehicleInfo();
 
+    std::cout << Vehicle::GetLocation() << std::endl;
+    std::cout << "Vehicle created: " << Vehicle::GetTotalVehicles() << std::endl;
+
     return 0;
 }

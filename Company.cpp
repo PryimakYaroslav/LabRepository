@@ -2,6 +2,9 @@
 #include <iostream>
 #include <string>
 
+std::string Company::OfficeLocation = "Kyiv";
+std::string Company::ParentCorporation = "Global Transport Group";
+
 Company::Company() : Company ("Unknown", 0, 0, 0) {}
 
 Company::Company(std::string CName) : Company (CName, 0, 0, 0) {}
@@ -44,4 +47,12 @@ void Company::UptadeTransport(){
 
     if (VehicleCount < 0)
     VehicleCount = 0;
+}
+
+std::string Company::GetOfficeLocation(){
+    return "All companys are located in " + OfficeLocation + " city";
+}
+
+std::string Company::GetParentCorporation(){
+    return "Parent corporation for all companies is " + ParentCorporation;
 }

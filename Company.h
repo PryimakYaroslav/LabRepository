@@ -10,6 +10,9 @@ class Company{
     int DriverCount;
     double CompanyRating;
 
+    static std::string OfficeLocation;
+    static std::string ParentCorporation;
+
     public:
 
     Company();
@@ -21,5 +24,8 @@ class Company{
     void SetRating(double Rating);
     void IncreasRating();
     void UptadeTransport();
+
+    static std::string GetOfficeLocation();
+    static std::string GetParentCorporation();
 
 };

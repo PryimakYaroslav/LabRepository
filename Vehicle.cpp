@@ -62,7 +62,7 @@ Vehicle::Vehicle(const Vehicle& other) :
     run(other.run)
 {
     totalVehicles++;
-    std::cout << "Vehicle vopy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
+    std::cout << "Vehicle copy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
 }
 
 void Vehicle::IncreasRun(){

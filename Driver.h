@@ -17,6 +17,7 @@ class Driver{
     Driver();
     Driver(std::string DName, int DAge);
     Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
+    Driver(Driver&& other) noexcept;
     ~Driver();
 
     friend std::ostream& operator<<(std::ostream& os, const Driver& d);

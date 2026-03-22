@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <utility>
 #include "Company.h"
 #include "Driver.h"
 #include "Vehicle.h"
@@ -18,6 +19,9 @@ int main(){
 
     const Driver archiveDriver("Petro", 40, 17, 3);
     archiveDriver.PrintDriverInfo();
+
+    Driver DriverA("Ivan", 30, 5, 0);
+    Driver driverB = std::move(DriverA);
 
     Vehicle Vehicle1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
     Vehicle1.IncreasRun();

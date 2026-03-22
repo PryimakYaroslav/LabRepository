@@ -19,6 +19,19 @@ Driver::~Driver() {
         std::cout << "Info about driver " << name << " destroyed" << std::endl;
 }
 
+Driver::Driver(Driver&& other) noexcept 
+    : name(std::move(other.name)),
+      age(other.age),
+      seniority(other.seniority),
+      fineCount(other.fineCount) 
+{
+    other.age = 0;
+    other.seniority = 0;
+    other.fineCount = 0;
+    
+    std::cout << "Move constructor called for " << name << std::endl;
+}
+
 std::ostream& operator<<(std::ostream& os, const Driver& d) {
     os << "===================================" << std::endl;
     os << "Driver Name: " << d.name << std::endl;
@@ -45,7 +58,7 @@ void Driver::PrintDriverInfo() const{
 }
 
 void Driver::UpdateDriverData(){
-    this -> age + 5;
+    this -> age += 5;
     this -> seniority -= 7;
     this -> fineCount += 1;
 

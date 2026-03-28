@@ -6,17 +6,17 @@
 std::string Vehicle::location = "Hangar 1";
 int Vehicle::totalVehicles = 0;
 
-Vehicle::Vehicle() : Vehicle(0, "Unknown", "Unknown", "None", "None", 0) {}
+Vehicle::Vehicle() : Vehicle(0, "Unknown", 0, "None", "None", 0) {}
 
-Vehicle::Vehicle(int id, std::string model, std::string brand) 
-    : Vehicle(id, model, brand, "None", "None", 0) {} 
+Vehicle::Vehicle(int id, std::string model, int countOfSeats) 
+    : Vehicle(id, model, countOfSeats, "None", "None", 0) {} 
 
-Vehicle::Vehicle(int id, std::string model, std::string brand, std::string FirstStop, std::string LastStop, long run) : 
+Vehicle::Vehicle(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run) : 
     id(id), 
     model(model), 
-    brand(brand), 
-    FirstStop(FirstStop), 
-    LastStop(LastStop), 
+    countOfSeats(countOfSeats), 
+    routStart(routStart), 
+    destination(destination), 
     run(run) 
     {
         totalVehicles++;
@@ -30,9 +30,9 @@ std::ostream& operator<<(std::ostream& os, const Vehicle& v){
     os << "===================================" << std::endl;
     os << "Vehicle ID: " << v.id << std::endl;
     os << "Model: " << v.model << std::endl;
-    os << "Brand: " << v.brand << std::endl;
-    os << "First Stop: " << v.FirstStop << std::endl;
-    os << "Last Stop: " << v.LastStop << std::endl;
+    os << "Count of seats: " << v.countOfSeats << std::endl;
+    os << "Start of rout: " << v.routStart << std::endl;
+    os << "Destination: " << v.destination << std::endl;
     os << "Run: " << v.run << std::endl;
     os << "Location: " << v.location << std::endl; 
     os << "===================================" << std::endl; 
@@ -43,7 +43,8 @@ std::ostream& operator<<(std::ostream& os, const Vehicle& v){
 std::istream& operator>>(std::istream& is, Vehicle& v) {
     std::cout << "Enter ID: "; is >> v.id;
     std::cout << "Enter Model: "; is >> v.model;
-    std::cout << "Enter Brand: "; is >> v.brand;
+    std::cout << "Enter start of rout: ", is >> v.routStart;
+    std::cout << "Enter destination: ", is >> v.destination;
     std::cout << "Enter Run: "; is >> v.run;
     
     return is;
@@ -56,9 +57,9 @@ void Vehicle::PrintVehicleInfo() const{
 Vehicle::Vehicle(const Vehicle& other) :
     id(other.id),
     model(other.model),
-    brand(other.brand),
-    FirstStop(other.FirstStop),
-    LastStop(other.LastStop),
+    countOfSeats(other.countOfSeats),
+    routStart(other.routStart),
+    destination(other.destination),
     run(other.run)
 {
     totalVehicles++;
@@ -70,7 +71,7 @@ void Vehicle::IncreasRun(){
 }
 
 void Vehicle::SwapStops(){
-        std::swap(FirstStop, LastStop);
+        std::swap(routStart, destination);
 }
 
 std::string Vehicle::GetLocation(){

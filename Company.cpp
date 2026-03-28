@@ -53,7 +53,7 @@ void Company::SetRating(double Rating){
 }
 
 void Company::IncreasRating(){
-    CompanyRating = CompanyRating + 0.5;
+    this -> CompanyRating + 0.5;
 }
 
 void Company::UptadeTransport(){

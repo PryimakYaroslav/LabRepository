@@ -4,43 +4,26 @@
 #include "Company.h"
 #include "Driver.h"
 #include "Vehicle.h"
+#include "Van.h"
+#include "Microbus.h"
+#include "Touristbus.h"
 
 using namespace std;
 
 int main(){
-    Company Company1("TourUa", 30, 35, 4.2);
-    Company1.IncreasRating();
-    Company1.UptadeTransport();
-    Company1.PrintCompanyInfo();
 
-    Driver Driver1("Vadim", 45, 20, 5);
-    Driver1.UpdateDriverData();
-    Driver1.PrintDriverInfo();
-
-    const Driver archiveDriver("Petro", 40, 17, 3);
-    archiveDriver.PrintDriverInfo();
-
-    Driver DriverA("Ivan", 30, 5, 0);
-    Driver driverB = std::move(DriverA);
-
-    Vehicle Vehicle1(11, "minivan", "Citroen", "Kyiv", "Krakiv", 200000);
+    Vehicle Vehicle1(11, "minivan", 7, "Kyiv", "Krakiv", 200000);
     Vehicle1.IncreasRun();
     Vehicle1.SwapStops();
     Vehicle1.PrintVehicleInfo();
 
-    const Vehicle WrittenOffVehicle(3, "bus", "Mercedes", "Kyiv", "Krakiv", 1000000);
-    WrittenOffVehicle.PrintVehicleInfo();
+    Van vanFull(1, "Van", 15, "Chernivtsi", "Kyiv", 30000, 2.5, true, true);
 
-    Vehicle Vehicle2 = Vehicle1;
+    Microbus microFull(2, "Microbus", 22, "Kyiv", "Lviv", 12500, true, true, "Lux");
 
-    std::cout << Vehicle::GetLocation() << std::endl;
+    Touristbus touristFull(3, "Touristbus", 50, "Dnipro", "Sofia", 100000, 4, true, false);
+    
     std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
-
-    std::cout << Company::GetOfficeLocation() << std::endl;
-    std::cout << Company::GetParentCorporation() << std::endl;
-
-    std::cout << Driver::GetDriverCategory() << std::endl;
-    std::cout << "Avarage driver salary: " << Driver::GetAvarageSalary() << " USD" << std::endl;
 
     return 0;
 }

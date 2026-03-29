@@ -66,6 +66,21 @@ Vehicle::Vehicle(const Vehicle& other) :
     std::cout << "Vehicle copy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
 }
 
+Vehicle::Vehicle(Vehicle&& other) noexcept :
+    id(other.id),
+    model(std::move(other.model)),
+    countOfSeats(other.countOfSeats),
+    routStart(std::move(other.routStart)),
+    destination(std::move(other.destination)),
+    run(other.run)
+{
+    other.id = 0; 
+    
+    totalVehicles++; 
+
+    std::cout << "Vehicle moved. ID: " << id << ". Total: " << totalVehicles << std::endl;
+}
+
 void Vehicle::IncreasRun(){
     run = run + 40000;
 }

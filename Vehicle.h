@@ -19,6 +19,7 @@ class Vehicle{
     Vehicle(int id, std::string model, int countOfSeats);
     Vehicle(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run);
     Vehicle(const Vehicle& other);
+    Vehicle(Vehicle&& other) noexcept;
     ~Vehicle();
 
     friend std::ostream& operator<<(std::ostream& os, const Vehicle& v);

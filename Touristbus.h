@@ -14,4 +14,6 @@ class Touristbus : public Vehicle{
     Touristbus(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run, 
     int numberOfScreens, bool hasToilets, bool isDoubleDeckered);
     ~Touristbus();
+
+    Touristbus(const Touristbus& other);
 };

@@ -22,3 +22,11 @@ Touristbus::Touristbus(int id, std::string model, int countOfSeats, std::string 
 Touristbus::~Touristbus(){
     std::cout << "Touristbus destroyed" << std::endl;
 }
+
+Touristbus::Touristbus(const Touristbus& other) :
+    Vehicle(other),
+    numberOfScreens(numberOfScreens),
+    hasToilet(hasToilet),
+    isDoubleDeckered(isDoubleDeckered) {
+        std::cout << "Tourist bus copie created" << std::endl;
+    }

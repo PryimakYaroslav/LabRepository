@@ -22,6 +22,8 @@ int main(){
     Microbus microFull(2, "Microbus", 22, "Kyiv", "Lviv", 12500, true, true, "Lux");
 
     Touristbus touristFull(3, "Touristbus", 50, "Dnipro", "Sofia", 100000, 4, true, false);
+
+    Touristbus Touristbus = touristFull;
     
     std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
 

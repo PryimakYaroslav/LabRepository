@@ -5,15 +5,16 @@
 std::string Driver::DriverCategory = "D";
 int Driver::AvarageSalary = 1100;
 
-Driver::Driver() : Driver("Unknown", 0, 0, 0) {}
+Driver::Driver() : Driver("Unknown", 0, 0, 0, Vehicle()) {}
 
-Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0) {}
+Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0, Vehicle()) {}
 
-Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount) :
+Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle transport) :
     name(DName),
     age(DAge),
     seniority(Dseniority),
-    fineCount(DfineCount) {}
+    fineCount(DfineCount),
+    myVehicle(transport) {}
 
 Driver::~Driver() {
         std::cout << "Info about driver " << name << " destroyed" << std::endl;
@@ -23,7 +24,8 @@ Driver::Driver(Driver&& other) noexcept
     : name(std::move(other.name)),
       age(other.age),
       seniority(other.seniority),
-      fineCount(other.fineCount) 
+      fineCount(other.fineCount),
+      myVehicle(std::move(other.myVehicle))
 {
     other.age = 0;
     other.seniority = 0;
@@ -39,6 +41,7 @@ std::ostream& operator<<(std::ostream& os, const Driver& d) {
     os << "Driver seniority: " << d.seniority << " years" << std::endl;
     os << "Fine Count: " << d.fineCount << std::endl;
     os << "Category: " << Driver::DriverCategory << std::endl;
+    os << d.myVehicle;
     os << "===================================";
 
     return os;

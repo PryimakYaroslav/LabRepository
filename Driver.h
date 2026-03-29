@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include "Vehicle.h"
 
 class Driver{
 
@@ -13,10 +14,12 @@ class Driver{
     static std::string DriverCategory;
     static int AvarageSalary;
 
+    Vehicle myVehicle;
+
     public:
     Driver();
     Driver(std::string DName, int DAge);
-    Driver(std::string DName, int DAge, int Dseniority, int DfineCount);
+    Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle transport);
     Driver(Driver&& other) noexcept;
     ~Driver();
 

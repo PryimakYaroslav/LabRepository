@@ -12,21 +12,11 @@ using namespace std;
 
 int main(){
 
-    Vehicle Vehicle1(11, "minivan", 7, "Kyiv", "Krakiv", 200000);
-    Vehicle1.IncreasRun();
-    Vehicle1.SwapStops();
-    Vehicle1.PrintVehicleInfo();
+    Vehicle Vehicle1(4, "Mercedes", 60, "Hotun", "Sataniv", 250000);
 
-    Van vanFull(1, "Van", 15, "Chernivtsi", "Kyiv", 30000, 2.5, true, true);
-
-    Microbus microFull(2, "Microbus", 22, "Kyiv", "Lviv", 12500, true, true, "Lux");
-
-    Touristbus Touristbus1(3, "Touristbus", 50, "Dnipro", "Sofia", 100000, 4, true, false);
-    Touristbus TouristbusA(4, "Mercedes", 60, "Hotun", "Sataniv", 250000, 6, true, true);
-
-    Touristbus Touristbus2 = Touristbus1;
-
-    Touristbus TouristbusB = std::move(TouristbusA);
+    Driver Driver1("Vadim", 43, 17, 2, Vehicle1);
+    
+    Driver1.PrintDriverInfo();
     
     std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
 

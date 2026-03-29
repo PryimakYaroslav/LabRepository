@@ -16,4 +16,5 @@ class Touristbus : public Vehicle{
     ~Touristbus();
 
     Touristbus(const Touristbus& other);
+    Touristbus(Touristbus&& other) noexcept;
 };

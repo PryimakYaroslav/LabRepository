@@ -1,4 +1,5 @@
 #include "Touristbus.h"
+#include <utility>
 #include <iostream>
 
 Touristbus::Touristbus() : Vehicle(),
@@ -30,3 +31,12 @@ Touristbus::Touristbus(const Touristbus& other) :
     isDoubleDeckered(isDoubleDeckered) {
         std::cout << "Tourist bus copie created" << std::endl;
     }
+
+Touristbus::Touristbus(Touristbus&& other) noexcept : 
+    Vehicle(std::move(other)),
+    numberOfScreens(other.numberOfScreens),
+    hasToilet(other.hasToilet),
+    isDoubleDeckered(other.isDoubleDeckered)
+{
+    std::cout << "Touristbus moved." << std::endl;
+}

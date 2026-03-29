@@ -21,9 +21,12 @@ int main(){
 
     Microbus microFull(2, "Microbus", 22, "Kyiv", "Lviv", 12500, true, true, "Lux");
 
-    Touristbus touristFull(3, "Touristbus", 50, "Dnipro", "Sofia", 100000, 4, true, false);
+    Touristbus Touristbus1(3, "Touristbus", 50, "Dnipro", "Sofia", 100000, 4, true, false);
+    Touristbus TouristbusA(4, "Mercedes", 60, "Hotun", "Sataniv", 250000, 6, true, true);
 
-    Touristbus Touristbus = touristFull;
+    Touristbus Touristbus2 = Touristbus1;
+
+    Touristbus TouristbusB = std::move(TouristbusA);
     
     std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
 

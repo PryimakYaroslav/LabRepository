@@ -29,7 +29,7 @@ Touristbus::Touristbus(const Touristbus& other) :
     numberOfScreens(numberOfScreens),
     hasToilet(hasToilet),
     isDoubleDeckered(isDoubleDeckered) {
-        std::cout << "Tourist bus copie created" << std::endl;
+    std::cout << "Tourist bus copie created" << std::endl;
     }
 
 Touristbus::Touristbus(Touristbus&& other) noexcept : 

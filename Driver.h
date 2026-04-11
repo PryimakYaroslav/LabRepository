@@ -19,7 +19,7 @@ class Driver{
     public:
     Driver();
     Driver(std::string DName, int DAge);
-    Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle transport);
+    Driver(std::string DName, int DAge, int Dseniority, int DfineCount, const Vehicle& transport);
     Driver(Driver&& other) noexcept;
     ~Driver();
 

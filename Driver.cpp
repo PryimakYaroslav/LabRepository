@@ -9,7 +9,7 @@ Driver::Driver() : Driver("Unknown", 0, 0, 0, Vehicle()) {}
 
 Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0, Vehicle()) {}
 
-Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle transport) :
+Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, const Vehicle& transport) :
     name(DName),
     age(DAge),
     seniority(Dseniority),

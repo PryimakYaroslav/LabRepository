@@ -5,6 +5,7 @@
 
 class Vehicle{
 
+    protected:
     int id;
     std::string model;
     int countOfSeats;

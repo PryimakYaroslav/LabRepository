@@ -5,11 +5,11 @@
 std::string Driver::DriverCategory = "D";
 int Driver::AvarageSalary = 1100;
 
-Driver::Driver() : Driver("Unknown", 0, 0, 0, Vehicle()) {}
+Driver::Driver() : Driver("Unknown", 0, 0, 0, nullptr) {}
 
-Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0, Vehicle()) {}
+Driver::Driver(std::string DName, int DAge) : Driver(DName, DAge, 0, 0, nullptr) {}
 
-Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, const Vehicle& transport) :
+Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle* transport) :
     name(DName),
     age(DAge),
     seniority(Dseniority),
@@ -25,8 +25,9 @@ Driver::Driver(Driver&& other) noexcept
       age(other.age),
       seniority(other.seniority),
       fineCount(other.fineCount),
-      myVehicle(std::move(other.myVehicle))
+      myVehicle((other.myVehicle))
 {
+    other.myVehicle = nullptr;
     other.age = 0;
     other.seniority = 0;
     other.fineCount = 0;
@@ -41,7 +42,11 @@ std::ostream& operator<<(std::ostream& os, const Driver& d) {
     os << "Driver seniority: " << d.seniority << " years" << std::endl;
     os << "Fine Count: " << d.fineCount << std::endl;
     os << "Category: " << Driver::DriverCategory << std::endl;
-    os << d.myVehicle;
+    if (d.myVehicle) {
+        d.myVehicle->PrintVehicleInfo();
+    } else {
+        os << "Vehicle: none" << std::endl;
+    }
     os << "===================================";
 
     return os;

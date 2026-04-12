@@ -40,3 +40,20 @@ Touristbus::Touristbus(Touristbus&& other) noexcept :
 {
     std::cout << "Touristbus moved." << std::endl;
 }
+
+void Touristbus::PrintVehicleInfo() const {
+    std::cout << "======== Touristbus Info ==========";
+    Vehicle::PrintVehicleInfo();
+    std::cout << "Number of screens: " << numberOfScreens << std::endl;
+    std::cout << "Toilet: " << hasToilet << std::endl;
+    std::cout << "Double deckered: " << isDoubleDeckered << std::endl;
+    std::cout << "===================================" << std::endl;
+}
+
+void Touristbus::IncreasRun() {
+    run += 50000;
+}
+
+void Touristbus::SwapStops() {
+    Vehicle::SwapStops();
+}

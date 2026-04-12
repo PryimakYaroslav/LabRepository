@@ -17,4 +17,9 @@ class Touristbus : public Vehicle{
 
     Touristbus(const Touristbus& other);
     Touristbus(Touristbus&& other) noexcept;
+
+    void PrintVehicleInfo() const override;
+    void IncreasRun() override;
+    void SwapStops() override;
+
 };

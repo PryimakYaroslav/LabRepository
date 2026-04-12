@@ -25,9 +25,9 @@ class Vehicle{
     friend std::ostream& operator<<(std::ostream& os, const Vehicle& v);
     friend std::istream& operator>>(std::istream& is, Vehicle& v);
 
-    void IncreasRun();
-    void SwapStops();
-    void PrintVehicleInfo() const;
+    virtual void IncreasRun();
+    virtual void SwapStops();
+    virtual void PrintVehicleInfo() const;
     static std::string GetLocation();
     static int GetTotalVehicles();
 };

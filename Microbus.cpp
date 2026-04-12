@@ -22,3 +22,20 @@ bool climateControl, bool hasAdjustableSeats, std::string interiorType) :
 Microbus::~Microbus(){
     std::cout << "Microbus destroyed" << std::endl;
 }
+
+void Microbus::PrintVehicleInfo() const {
+    std::cout << "========== Microbus Info ===========";
+    Vehicle::PrintVehicleInfo();
+    std::cout << "Climate control: " << climateControl << std::endl;
+    std::cout << "Adjustable seats: " << hasAdjustableSeats << std::endl;
+    std::cout << "Interior type: " << interiorType << std::endl;
+    std::cout << "===================================" << std::endl;
+}
+
+void Microbus::IncreasRun() {
+    run += 30000;
+}
+
+void Microbus::SwapStops() {
+    Vehicle::SwapStops();
+}

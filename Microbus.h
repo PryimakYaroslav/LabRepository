@@ -15,4 +15,8 @@ class Microbus : public Vehicle{
     bool climateControl, bool hasAdjustableSeats, std::string interiorType);
     ~Microbus();
 
+    void PrintVehicleInfo() const override;
+    void IncreasRun() override;
+    void SwapStops() override;
+
 };

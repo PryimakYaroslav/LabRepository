@@ -17,6 +17,10 @@ Driver::Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehi
     myVehicle(transport) {}
 
 Driver::~Driver() {
+    if (myVehicle != nullptr) {
+        delete myVehicle;
+        myVehicle = nullptr;
+    }
         std::cout << "Info about driver " << name << " destroyed" << std::endl;
 }
 

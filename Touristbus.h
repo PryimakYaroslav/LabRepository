@@ -3,7 +3,7 @@
 
 #include <string>
 
-class Touristbus : public Vehicle{
+class Touristbus final: public Vehicle{
     int numberOfScreens;
     bool hasToilet;
     bool isDoubleDeckered;
@@ -18,8 +18,8 @@ class Touristbus : public Vehicle{
     Touristbus(const Touristbus& other);
     Touristbus(Touristbus&& other) noexcept;
 
-    void PrintVehicleInfo() const override;
-    void IncreasRun() override;
-    void SwapStops() override;
+    void PrintVehicleInfo() const override final;
+    void IncreasRun() override final;
+    void SwapStops() override final;
 
 };

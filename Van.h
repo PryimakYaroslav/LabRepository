@@ -3,7 +3,7 @@
 
 #include <string>
 
-class Van : public Vehicle{
+class Van final: public Vehicle{
     double cargoCapacity;
     bool hasUSBports;
     bool hasConditioner;

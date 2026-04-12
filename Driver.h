@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Vehicle.h"
 
-class Driver{
+class Driver final{
 
     std::string name;
     int age;

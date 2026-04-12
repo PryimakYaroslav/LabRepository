@@ -18,8 +18,8 @@ class Touristbus final: public Vehicle{
     Touristbus(const Touristbus& other);
     Touristbus(Touristbus&& other) noexcept;
 
-    void PrintVehicleInfo() const override final;
-    void IncreasRun() override final;
-    void SwapStops() override final;
+    void PrintVehicleInfo() const override;
+    void IncreasRun() override;
+    void SwapStops() override;
 
 };

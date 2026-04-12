@@ -21,7 +21,7 @@ class Vehicle{
     Vehicle(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run);
     Vehicle(const Vehicle& other);
     Vehicle(Vehicle&& other) noexcept;
-    ~Vehicle();
+    virtual ~Vehicle();
 
     friend std::ostream& operator<<(std::ostream& os, const Vehicle& v);
     friend std::istream& operator>>(std::istream& is, Vehicle& v);

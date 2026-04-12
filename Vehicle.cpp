@@ -27,15 +27,13 @@ Vehicle::~Vehicle(){
 }
 
 std::ostream& operator<<(std::ostream& os, const Vehicle& v){
-    os << "===================================" << std::endl;
     os << "Vehicle ID: " << v.id << std::endl;
     os << "Model: " << v.model << std::endl;
     os << "Count of seats: " << v.countOfSeats << std::endl;
     os << "Start of rout: " << v.routStart << std::endl;
     os << "Destination: " << v.destination << std::endl;
     os << "Run: " << v.run << std::endl;
-    os << "Location: " << v.location << std::endl; 
-    os << "===================================" << std::endl; 
+    os << "Location: " << v.location; 
 
     return os;
 }

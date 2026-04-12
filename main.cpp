@@ -12,10 +12,12 @@ using namespace std;
 
 int main(){
 
-Van myVan(5, "Ford Transit", 7, "Kyiv", "Hotun", 45000, 2.8, true, true);
-Vehicle* ptr = &myVan;
+Touristbus Touristbus1(1, "Touristbus", 50, "Kyiv", "Berlin", 47500, 3, true, false);
+Vehicle* ptr = &Touristbus1;
 
 ptr->PrintVehicleInfo();
+ptr->IncreasRun();
+ptr->SwapStops();
 
     return 0;
 }

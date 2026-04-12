@@ -42,7 +42,7 @@ Touristbus::Touristbus(Touristbus&& other) noexcept :
 }
 
 void Touristbus::PrintVehicleInfo() const {
-    std::cout << "======== Touristbus Info ==========";
+    std::cout << "======== Touristbus Info ==========" << std::endl;
     Vehicle::PrintVehicleInfo();
     std::cout << "Number of screens: " << numberOfScreens << std::endl;
     std::cout << "Toilet: " << hasToilet << std::endl;

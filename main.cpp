@@ -12,13 +12,10 @@ using namespace std;
 
 int main(){
 
-    Vehicle Vehicle1(4, "Mercedes", 60, "Hotun", "Sataniv", 250000);
+Van myVan(5, "Ford Transit", 7, "Kyiv", "Hotun", 45000, 2.8, true, true);
+Vehicle* ptr = &myVan;
 
-    Driver Driver1("Vadim", 43, 17, 2, Vehicle1);
-    
-    Driver1.PrintDriverInfo();
-    
-    std::cout << "Vehicle created (with copies): " << Vehicle::GetTotalVehicles() << std::endl;
+ptr->PrintVehicleInfo();
 
     return 0;
 }

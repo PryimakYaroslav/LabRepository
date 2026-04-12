@@ -19,6 +19,16 @@ Van::Van(int id, std::string model, int countOfSeats, std::string routStart, std
     hasUSBports(hasUSBports),
     hasConditioner(hasConditioner) {}
 
+
+void Van::PrintVehicleInfo() const {
+    std::cout << "============ Van Info =============";
+    Vehicle::PrintVehicleInfo();
+    std::cout << "Cargo Capacity: " << cargoCapacity << " kg"  << std::endl;
+    std::cout << "USB Ports: " << hasUSBports << std::endl;
+    std::cout << "Air Conditioner: " << hasConditioner << std::endl;
+    std::cout << "===================================" << std::endl;
+}
+
 Van::~Van(){
     std::cout << "Van destroyed" << std::endl;
 }

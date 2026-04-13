@@ -14,7 +14,7 @@ class Van final: public Vehicle{
     Van(int id, std::string model, int countOfSeats, double cargoCapacity, bool hasUSBports, bool hasConditioner);
     Van(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run,
     double cargoCapacity, bool hasUSBports, bool hasConditioner);
-    ~Van();
+    virtual ~Van();
 
     void PrintVehicleInfo() const;
 };

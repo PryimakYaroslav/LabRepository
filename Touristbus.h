@@ -13,7 +13,7 @@ class Touristbus final: public Vehicle{
     Touristbus(int id, std::string model, int countOfSeats, int numberOfScreens, bool hasToilets, bool isDoubleDeckered);
     Touristbus(int id, std::string model, int countOfSeats, std::string routStart, std::string destination, long run, 
     int numberOfScreens, bool hasToilets, bool isDoubleDeckered);
-    ~Touristbus() override;
+    virtual ~Touristbus();
 
     Touristbus(const Touristbus& other);
     Touristbus(Touristbus&& other) noexcept;

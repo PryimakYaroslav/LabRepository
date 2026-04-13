@@ -24,7 +24,7 @@ Microbus::~Microbus(){
 }
 
 void Microbus::PrintVehicleInfo() const {
-    std::cout << "========== Microbus Info ===========";
+    std::cout << "========== Microbus Info ===========" << std::endl;
     Vehicle::PrintVehicleInfo();
     std::cout << "Climate control: " << climateControl << std::endl;
     std::cout << "Adjustable seats: " << hasAdjustableSeats << std::endl;

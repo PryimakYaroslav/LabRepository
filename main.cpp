@@ -19,5 +19,9 @@ ptr->PrintVehicleInfo();
 ptr->IncreasRun();
 ptr->SwapStops();
 
-    return 0;
+Microbus Microbus1(2, "Microbus", 20, "Kyiv", "Lviv", 35000, true, true, "Classic");
+Vehicle& vRef = Microbus1;
+vRef.PrintVehicleInfo();
+
+return 0;
 }

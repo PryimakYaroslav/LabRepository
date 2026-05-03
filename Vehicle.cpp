@@ -84,7 +84,19 @@ void Vehicle::IncreasRun(){
 }
 
 void Vehicle::SwapStops(){
-        std::swap(routStart, destination);
+    std::swap(routStart, destination);
+}
+
+std::string Vehicle::GetRoutStart(){
+    return routStart;
+}
+
+std::string Vehicle::GetDestination(){
+    return destination;
+}
+
+int Vehicle::GetID(){
+    return id;
 }
 
 std::string Vehicle::GetLocation(){

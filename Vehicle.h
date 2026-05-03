@@ -28,6 +28,9 @@ class Vehicle{
 
     virtual void IncreasRun();
     virtual void SwapStops();
+    std::string GetRoutStart();
+    std::string GetDestination();
+    virtual int GetID();
     virtual void PrintVehicleInfo() const = 0;
     static std::string GetLocation();
     static int GetTotalVehicles();

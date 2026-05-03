@@ -21,12 +21,10 @@ Van::Van(int id, std::string model, int countOfSeats, std::string routStart, std
 
 
 void Van::PrintVehicleInfo() const {
-    std::cout << "============ Van Info =============" << std::endl;
     Vehicle::PrintVehicleInfo();
-    std::cout << "Cargo Capacity: " << cargoCapacity << " kg"  << std::endl;
+    std::cout << "Cargo Capacity: " << cargoCapacity << " m^3"  << std::endl;
     std::cout << "USB Ports: " << (hasUSBports ? "Present" : "None") << std::endl;
     std::cout << "Air Conditioner: " << (hasConditioner ? "Installed" : "Not installed") << std::endl;
-    std::cout << "===================================" << std::endl;
 }
 
 Van::~Van(){

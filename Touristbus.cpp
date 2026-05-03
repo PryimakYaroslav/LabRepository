@@ -42,12 +42,10 @@ Touristbus::Touristbus(Touristbus&& other) noexcept :
 }
 
 void Touristbus::PrintVehicleInfo() const {
-    std::cout << "======== Touristbus Info ==========" << std::endl;
     Vehicle::PrintVehicleInfo();
     std::cout << "Number of screens: " << numberOfScreens << std::endl;
     std::cout << "Toilet: " << (hasToilet ? "Available" : "Not available") << std::endl;
     std::cout << "Bus type: " << (isDoubleDeckered ? "Double-deckered" : "Standard (Single deck)") << std::endl;
-    std::cout << "===================================" << std::endl;
 }
 
 void Touristbus::IncreasRun() {

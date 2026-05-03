@@ -24,12 +24,10 @@ Microbus::~Microbus(){
 }
 
 void Microbus::PrintVehicleInfo() const {
-    std::cout << "========== Microbus Info ===========" << std::endl;
     Vehicle::PrintVehicleInfo();
     std::cout << "Climate control: " << (climateControl ? "Equipped" : "Not equipped") << std::endl;
     std::cout << "Adjustable seats: " << (hasAdjustableSeats ? "Yes" : "No") << std::endl;
     std::cout << "Interior type: " << interiorType << std::endl;
-    std::cout << "===================================" << std::endl;
 }
 
 void Microbus::IncreasRun() {

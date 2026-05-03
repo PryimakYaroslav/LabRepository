@@ -26,6 +26,25 @@ void showMenu() {
     std::cout << "Your choice: ";
 }
 
+class InvalidInputException : public std::exception {
+    public:
+    const char* what() const noexcept override {
+        return "Invalid input! Enter a valid number for the menu.";
+    }
+};
+
+class TransportNotFoundException : public std::exception {
+    std::string message;
+    public:
+    TransportNotFoundException (int id) {
+        message = "Error: Vehicle with ID " + std::to_string(id) + " was not found in our fleet";
+    }
+
+    const char* what() const noexcept override {
+        return message.c_str();
+    }
+};
+
 int main() {
     std::vector<std::shared_ptr<Vehicle>> fleet;
     std::vector<std::shared_ptr<Vehicle>> myTickets;
@@ -37,24 +56,19 @@ int main() {
 
 int choice = -1;
     while (choice != 0) {
-        // КРОК 1: Очищення консолі перед виводом меню
+        try{
         system("cls"); 
 
         showMenu();
         
-        // КРОК 2: Безпечне введення вибору
         if (!(std::cin >> choice)) {
-            std::cout << "\n[!] Error: Please enter a valid number.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            system("pause");
-            continue;
-        }
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw InvalidInputException(); // Кидаємо виняток
+            }
 
-        // Очищення буфера після cin >> choice, щоб getline працював коректно
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-        // КРОК 3: Обробка логіки
         switch (choice) {
             case 1:
                 std::cout << "\n--- All Vehicles ---\n";
@@ -66,24 +80,27 @@ int choice = -1;
                 break;
 
             case 2: {
-                int type;
-                std::cout << "\nChoose type (1-Van, 2-Microbus, 3-Touristbus): ";
-                std::cin >> type;
-                std::cout << "\n--- Filtered Results ---\n";
-                for (const auto& v : fleet) {
-                    bool match = false;
-                    if (type == 1 && std::dynamic_pointer_cast<Van>(v)) match = true;
-                    else if (type == 2 && std::dynamic_pointer_cast<Microbus>(v)) match = true;
-                    else if (type == 3 && std::dynamic_pointer_cast<Touristbus>(v)) match = true;
-
-                    if (match) {
-                        std::cout << "-----------------------" << std::endl;
-                        v->PrintVehicleInfo();
-                        std::cout << "-----------------------" << std::endl;
+                    int type;
+                    std::cout << "\nChoose type (1-Van, 2-Microbus, 3-Touristbus): ";
+                    if (!(std::cin >> type)) {
+                         std::cin.clear();
+                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                         throw InvalidInputException();
                     }
+                    std::cout << "\n--- Filtered Results ---\n";
+                    for (const auto& v : fleet) {
+                        bool match = false;
+                        if (type == 1 && std::dynamic_pointer_cast<Van>(v)) match = true;
+                        else if (type == 2 && std::dynamic_pointer_cast<Microbus>(v)) match = true;
+                        else if (type == 3 && std::dynamic_pointer_cast<Touristbus>(v)) match = true;
+
+                        if (match) {
+                            v->PrintVehicleInfo();
+                            std::cout << "-----------------------" << std::endl;
+                        }
+                    }
+                    break;
                 }
-                break;
-            }
 
             case 3: {
                 std::string start;
@@ -108,21 +125,26 @@ int choice = -1;
             }
 
             case 5: {
-                int id;
-                std::cout << "\nEnter ID for booking: ";
-                std::cin >> id;
-                bool found = false;
-                for (const auto& v : fleet) {
-                    if (v->GetID() == id) {
-                        myTickets.push_back(v);
-                        std::cout << "\n[OK] Ticket for " << v->GetDestination() << " added!\n";
-                        found = true;
-                        break;
+                    int id;
+                    std::cout << "\nEnter ID for booking: ";
+                    if (!(std::cin >> id)) {
+                         std::cin.clear();
+                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                         throw InvalidInputException();
                     }
+                    
+                    bool found = false;
+                    for (const auto& v : fleet) {
+                        if (v->GetID() == id) {
+                            myTickets.push_back(v);
+                            std::cout << "\n[OK] Ticket for " << v->GetDestination() << " added!\n";
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) throw TransportNotFoundException(id); // Кидаємо виняток, якщо ID невірний
+                    break;
                 }
-                if (!found) std::cout << "\n[!] Error: ID not found.\n";
-                break;
-            }
 
             case 6:
                 std::cout << "\n*** Your Booked Tickets ***\n";
@@ -141,13 +163,23 @@ int choice = -1;
                 break;
 
             default:
-                std::cout << "\n[!] Invalid option. Try again.\n";
+                throw InvalidInputException();
         }
 
-        // КРОК 4: Пауза перед наступною ітерацією, щоб користувач встиг побачити результат
+    }
+        catch (const TransportNotFoundException& e) {
+            std::cerr << "\n[NOT FOUND ERROR]: " << e.what() << std::endl;
+        }
+        catch (const InvalidInputException& e) {
+            std::cerr << "\n[INPUT ERROR]: " << e.what() << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cerr << "\n[GENERAL ERROR]: " << e.what() << std::endl;
+        }
+
+        
         if (choice != 0) {
             std::cout << "\nPress any key to return to menu...";
-            // Використовуємо system("pause"), щоб консоль чекала на дію користувача
             system("pause > nul"); 
         }
     }

@@ -59,7 +59,7 @@ class TransportNotFoundException : public std::exception {
 
 int main() {
     std::vector<std::shared_ptr<Vehicle>> fleet;
-    std::vector<std::shared_ptr<Vehicle>> myTickets;
+    std::vector<std::weak_ptr<Vehicle>> myTickets;
 
     fleet.push_back(std::make_shared<Touristbus>(1, "Tourist Bus", 56, "Chernivtsi", "Varna", 360000, 3, false, false));
     fleet.push_back(std::make_shared<Microbus>(2, "Microbus", 32, "Lviv", "Drezden", 175000, true, true, "Classic"));
@@ -189,11 +189,15 @@ int main() {
                         std::cout << "No tickets booked yet.\n";
                     } else {
                         for (const auto& t : myTickets) {
-                            std::cout << "- Trip: " << t->GetRoutStart() << " -> " 
-                                      << t->GetDestination() << " (ID: " << t->GetID() << ")\n";
+                            if (auto sharedTicket = t.lock()) {
+                            std::cout << "- Trip: " << sharedTicket->GetRoutStart() << " -> " 
+                                      << sharedTicket->GetDestination() << " (ID: " << sharedTicket->GetID() << ")\n";
+                        } else {
+                            std::cout << "- [Notice] This vehicle is no longer available.\n";
                         }
                     }
-                    break;
+                }
+                break;
 
                 default:
                     throw InvalidInputException();

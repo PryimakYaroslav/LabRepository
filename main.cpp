@@ -70,20 +70,48 @@ int main() {
 
     while (true) {
         try {
-            system("cls"); 
+            system("cls");
             showMenu();
-            
-            if (!(std::cin >> choice)) { 
+
+            if (!(std::cin >> choice)) {
                 std::cin.clear();
                 std::cin.ignore(10000, '\n');
-                throw InvalidInputException(); 
+                throw InvalidInputException();
             }
 
-            if (choice == 0) {
-                std::cout << "\nExiting... Have a nice day!\n";
-                break; 
-            }
+            if (choice == 0) break;
 
+            if (choice == 228) {
+                system("cls");
+                int password;
+                std::cout << "ADMIN MENU. Enter secret code: ";
+                std::cin >> password;
+
+                if (password == 688149) {
+                    bool runningAdminMenu = true;
+                    while (runningAdminMenu) {
+                        system("cls");
+                        showAdminMenu();
+
+                        int adminChoice;
+                        if (!(std::cin >> adminChoice)) {
+                            std::cin.clear();
+                            std::cin.ignore(10000, '\n');
+                            continue;
+                        }
+
+                        if (adminChoice == 0) {
+                            runningAdminMenu = false;
+                        } else {
+                            std::cout << "\n[Admin] Option " << adminChoice << " selected (Logic coming soon)\n";
+                            system("pause");
+                        }
+                    }
+                } else {
+                    throw std::runtime_error("Incorrect secret code!");
+                }
+            }
+            
             std::cin.ignore(10000, '\n');
 
             switch (choice) {

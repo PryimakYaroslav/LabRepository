@@ -2,10 +2,11 @@
 
 #include <string>
 #include <iostream>
+#include <memory>
 #include "Vehicle.h"
 
-class Driver final{
-
+class Driver final {
+    int id;
     std::string name;
     int age;
     int seniority;
@@ -14,13 +15,15 @@ class Driver final{
     static std::string DriverCategory;
     static int AvarageSalary;
 
-    Vehicle* myVehicle;
+    std::shared_ptr<Vehicle> myVehicle;
 
-    public:
+public:
     Driver();
-    Driver(std::string DName, int DAge);
-    Driver(std::string DName, int DAge, int Dseniority, int DfineCount, Vehicle* transport);
+    Driver(int id, std::string DName, int DAge);
+    Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount, std::shared_ptr<Vehicle> transport);
+    
     Driver(Driver&& other) noexcept;
+    
     ~Driver();
 
     friend std::ostream& operator<<(std::ostream& os, const Driver& d);
@@ -28,6 +31,11 @@ class Driver final{
 
     void UpdateDriverData();
     void PrintDriverInfo() const;
+
+    int GetID() const { return id; }
+    std::string GetName() const { return name; }
+    void SetVehicle(std::shared_ptr<Vehicle> v) { myVehicle = v; }
+    std::shared_ptr<Vehicle> GetVehicle() const { return myVehicle; }
 
     static std::string GetDriverCategory();
     static int GetAvarageSalary();

@@ -29,17 +29,18 @@ void showMenu() {
 void showAdminMenu() {
     std::cout << "\n============ Admin Menu =============\n";
     std::cout << "1. Add new vehicle\n";
-    std::cout << "2. Remove vehicle by ID";
+    std::cout << "2. Remove vehicle by ID\n";
     std::cout << "3. List of Drivers\n";
     std::cout << "4. Add new Driver\n";
-    std::cout << "5. Remove driver";
-    std::cout << "6. Change vehicle owner";
+    std::cout << "5. Remove driver\n";
+    std::cout << "6. Change vehicle owner\n";
+    std::cout << "7. Return to user menu\n";
     std::cout << "--------------------------------------\n";
     std::cout << "Your choice: ";
 }
 
 class InvalidInputException : public std::exception {
-    public:
+public:
     const char* what() const noexcept override {
         return "Invalid input! Enter a valid number for the menu.";
     }
@@ -47,8 +48,8 @@ class InvalidInputException : public std::exception {
 
 class TransportNotFoundException : public std::exception {
     std::string message;
-    public:
-    TransportNotFoundException (int id) {
+public:
+    TransportNotFoundException(int id) {
         message = "Error: Vehicle with ID " + std::to_string(id) + " was not found in our fleet";
     }
 
@@ -78,6 +79,7 @@ int main() {
                 std::cin.ignore(10000, '\n');
                 throw InvalidInputException();
             }
+            std::cin.ignore(10000, '\n'); // Очистка буфера після основного меню
 
             if (choice == 0) break;
 
@@ -85,7 +87,12 @@ int main() {
                 system("cls");
                 int password;
                 std::cout << "ADMIN MENU. Enter secret code: ";
-                std::cin >> password;
+                if (!(std::cin >> password)) {
+                    std::cin.clear();
+                    std::cin.ignore(10000, '\n');
+                    throw InvalidInputException();
+                }
+                std::cin.ignore(10000, '\n'); 
 
                 if (password == 688149) {
                     bool runningAdminMenu = true;
@@ -99,20 +106,144 @@ int main() {
                             std::cin.ignore(10000, '\n');
                             continue;
                         }
+                        std::cin.ignore(10000, '\n'); 
 
-                        if (adminChoice == 0) {
-                            runningAdminMenu = false;
-                        } else {
-                            std::cout << "\n[Admin] Option " << adminChoice << " selected (Logic coming soon)\n";
-                            system("pause");
+                        // Обробка підменю Адміна
+                        switch (adminChoice) {
+                            case 1: { // Додавання нового транспорту
+                                system("cls");
+                                std::cout << "===== ADD NEW VEHICLE =====\n";
+                                std::cout << "Choose type to add:\n";
+                                std::cout << "1. Van\n";
+                                std::cout << "2. Microbus\n";
+                                std::cout << "3. Touristbus\n";
+                                std::cout << "---------------------------\n";
+                                std::cout << "Your choice: ";
+
+                                int typeChoice;
+                                if (!(std::cin >> typeChoice)) {
+                                    std::cin.clear();
+                                    std::cin.ignore(10000, '\n');
+                                    throw InvalidInputException();
+                                }
+                                std::cin.ignore(10000, '\n'); 
+
+                                if (typeChoice < 1 || typeChoice > 3) {
+                                    std::cout << "\n[!] Invalid type selected.\n";
+                                    system("pause");
+                                    break;
+                                }
+
+                                // Загальні поля для базового класу Vehicle
+                                int id, seats;
+                                long run;
+                                std::string model, start, dest;
+
+                                std::cout << "\nEnter ID: "; 
+                                if (!(std::cin >> id)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                // Валідація на унікальність ID
+                                bool idExists = false;
+                                for (const auto& v : fleet) {
+                                    if (v->GetID() == id) { idExists = true; break; }
+                                }
+                                if (idExists) {
+                                    std::cout << "\n[!] Error: Vehicle with ID " << id << " already exists!\n";
+                                    system("pause");
+                                    break;
+                                }
+
+                                std::cout << "Enter Model: "; 
+                                std::getline(std::cin, model);
+
+                                std::cout << "Enter count of seats: "; 
+                                if (!(std::cin >> seats)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                std::cout << "Enter route start: "; 
+                                std::getline(std::cin, start);
+
+                                std::cout << "Enter destination: "; 
+                                std::getline(std::cin, dest);
+
+                                std::cout << "Enter run (mileage): "; 
+                                if (!(std::cin >> run)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                // Створення об'єкта залежно від підтипу
+                                if (typeChoice == 1) { // Van
+                                    double cargoCapacity;
+                                    bool hasUSB, hasConditioner;
+
+                                    std::cout << "Enter cargo capacity (m^3): ";
+                                    if (!(std::cin >> cargoCapacity)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    
+                                    std::cout << "Has USB ports? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> hasUSB)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    
+                                    std::cout << "Has air conditioner? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> hasConditioner)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    std::cin.ignore(10000, '\n');
+
+                                    fleet.push_back(std::make_shared<Van>(id, model, seats, start, dest, run, cargoCapacity, hasUSB, hasConditioner));
+                                    std::cout << "\n[OK] Van successfully added to the fleet!\n";
+
+                                } else if (typeChoice == 2) { // Microbus
+                                    bool climate, adjustableSeats;
+                                    std::string interior;
+
+                                    std::cout << "Has climate control? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> climate)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    
+                                    std::cout << "Has adjustable seats? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> adjustableSeats)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    std::cin.ignore(10000, '\n');
+
+                                    std::cout << "Enter interior type (e.g., Luxury, Classic, Standart): ";
+                                    std::getline(std::cin, interior);
+
+                                    fleet.push_back(std::make_shared<Microbus>(id, model, seats, start, dest, run, climate, adjustableSeats, interior));
+                                    std::cout << "\n[OK] Microbus successfully added to the fleet!\n";
+
+                                } else if (typeChoice == 3) { // Touristbus
+                                    int screens;
+                                    bool toilet, doubleDeck;
+
+                                    std::cout << "Enter number of screens: ";
+                                    if (!(std::cin >> screens)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    
+                                    std::cout << "Has toilet? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> toilet)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    
+                                    std::cout << "Is double-deckered? (1 - Yes, 0 - No): ";
+                                    if (!(std::cin >> doubleDeck)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                    std::cin.ignore(10000, '\n');
+
+                                    fleet.push_back(std::make_shared<Touristbus>(id, model, seats, start, dest, run, screens, toilet, doubleDeck));
+                                    std::cout << "\n[OK] Tourist Bus successfully added to the fleet!\n";
+                                }
+
+                                system("pause");
+                                break;
+                            }
+
+                            case 7:
+                            case 0:
+                                runningAdminMenu = false;
+                                break;
+
+                            default:
+                                std::cout << "\n[Admin] Option " << adminChoice << " selected (Logic coming soon)\n";
+                                system("pause");
+                                break;
                         }
                     }
                 } else {
                     throw std::runtime_error("Incorrect secret code!");
                 }
+                continue; 
             }
-            
-            std::cin.ignore(10000, '\n');
 
             switch (choice) {
                 case 1:
@@ -128,6 +259,7 @@ int main() {
                     int type;
                     std::cout << "\nChoose type (1-Van, 2-Microbus, 3-Touristbus): ";
                     if (!(std::cin >> type)) throw InvalidInputException();
+                    std::cin.ignore(10000, '\n');
 
                     std::cout << "\n--- Filtered Results ---\n";
                     for (const auto& v : fleet) {
@@ -169,6 +301,7 @@ int main() {
                     int id;
                     std::cout << "\nEnter ID for booking: ";
                     if (!(std::cin >> id)) throw InvalidInputException();
+                    std::cin.ignore(10000, '\n');
                     
                     bool found = false;
                     for (const auto& v : fleet) {
@@ -190,14 +323,14 @@ int main() {
                     } else {
                         for (const auto& t : myTickets) {
                             if (auto sharedTicket = t.lock()) {
-                            std::cout << "- Trip: " << sharedTicket->GetRoutStart() << " -> " 
-                                      << sharedTicket->GetDestination() << " (ID: " << sharedTicket->GetID() << ")\n";
-                        } else {
-                            std::cout << "- [Notice] This vehicle is no longer available.\n";
+                                std::cout << "- Trip: " << sharedTicket->GetRoutStart() << " -> " 
+                                          << sharedTicket->GetDestination() << " (ID: " << sharedTicket->GetID() << ")\n";
+                            } else {
+                                std::cout << "- [Notice] A vehicle from your bookings was removed from the fleet.\n";
+                            }
                         }
                     }
-                }
-                break;
+                    break;
 
                 default:
                     throw InvalidInputException();
@@ -210,11 +343,10 @@ int main() {
             std::cerr << "\n [!] INPUT ERROR: " << e.what() << std::endl;
         }
         catch (const std::exception& e) {
-            std::cerr << "\n [!] GENERAL ERROR: " << e.what() << std::endl;
+            std::cerr << "\n [!] ERROR: " << e.what() << std::endl;
         }
 
         std::cout << "\nPress Enter to continue...";
-        std::cin.ignore(10000, '\n');
         std::cin.get(); 
     }
 

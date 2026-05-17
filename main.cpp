@@ -68,6 +68,10 @@ int main() {
     fleet.push_back(std::make_shared<Van>(3, "Van", 8, "Vinnytsia", "Odesa", 55000, 2.8, true, true));
     fleet.push_back(std::make_shared<Touristbus>(4, "Tourist Bus", 50, "Kyiv", "Viena", 300000, 2, true, false));
 
+    Drivers.push_back(Driver(101, "Oleksandr Petrov", 42, 15, 0, fleet[0]));
+    Drivers.push_back(Driver(102, "Ivan Semenov", 35, 8, 2, fleet[1]));
+    Drivers.push_back(Driver(103, "Andriy Koval", 28, 3, 5, nullptr));
+
     int choice;
 
     while (true) {
@@ -276,7 +280,7 @@ int main() {
                             case 4: {
                                 system("cls");
                                 std::cout << "===== ADD NEW DRIVER =====\n";
-        
+                                
                                 int id, age, seniority, fines;
                                 std::string name;
 
@@ -316,24 +320,59 @@ int main() {
                                         std::shared_ptr<Vehicle> foundVehicle = nullptr;
                                         for (size_t i = 0; i < fleet.size(); i++) {
                                             if (fleet[i]->GetID() == vehicleId) {
-                                            foundVehicle = fleet[i];
-                                            break;
+                                                foundVehicle = fleet[i];
+                                                break;
+                                            }
+                                        }
+                                        if (foundVehicle != nullptr) {
+                                            newDriver.SetVehicle(foundVehicle);
+                                            std::cout << "[OK] Vehicle with ID " << vehicleId << " successfully assigned to " << name << "!\n";
+                                        } else {
+                                            std::cout << "[!] Vehicle with ID " << vehicleId << " not found. Driver created without a vehicle.\n";
                                         }
                                     }
-                                    if (foundVehicle != nullptr) {
-                                        newDriver.SetVehicle(foundVehicle);
-                                        std::cout << "[OK] Vehicle with ID " << vehicleId << " successfully assigned to " << name << "!\n";
-                                    } else {
-                                        std::cout << "[!] Vehicle with ID " << vehicleId << " not found. Driver created without a vehicle.\n";
+                                }
+                                std::cin.ignore(10000, '\n');
+
+                                Drivers.push_back(std::move(newDriver));
+                                std::cout << "\n[OK] Driver successfully added to the system!\n";
+                                system("pause");
+                                break;
+                            }
+
+                            case 5: {
+                                system("cls");
+                                std::cout << "===== REMOVE DRIVER BY ID =====\n";
+                                std::cout << "Enter Driver ID to remove: ";
+                                
+                                int idToRemove;
+                                if (!(std::cin >> idToRemove)) {
+                                    std::cin.clear();
+                                    std::cin.ignore(10000, '\n');
+                                    throw InvalidInputException();
+                                }
+                                std::cin.ignore(10000, '\n'); 
+
+                                bool found = false;
+                                for (size_t i = 0; i < Drivers.size(); i++) {
+                                    if (Drivers[i].GetID() == idToRemove) {
+                                        std::cout << "\n[Notice] Driver " << Drivers[i].GetName() << " is being removed...\n";
+                                        
+                                        // Видалення за індексом
+                                        Drivers.erase(Drivers.begin() + i); 
+                                        
+                                        std::cout << "[OK] Driver with ID " << idToRemove << " was successfully removed.\n";
+                                        found = true;
+                                        break; 
                                     }
                                 }
-                            }
-                            std::cin.ignore(10000, '\n');
 
-                            Drivers.push_back(std::move(newDriver));
-                            std::cout << "\n[OK] Driver successfully added to the system!\n";
-                            system("pause");
-                            break;
+                                if (!found) {
+                                    std::cout << "\n[!] Error: Driver with ID " << idToRemove << " was not found in the system.\n";
+                                }
+
+                                system("pause");
+                                break;
                             }
 
                             case 7:

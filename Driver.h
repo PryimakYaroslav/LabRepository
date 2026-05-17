@@ -24,6 +24,8 @@ public:
     Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount, std::shared_ptr<Vehicle> transport);
     
     Driver(Driver&& other) noexcept;
+    Driver& operator=(Driver&& other) noexcept = default;
+    Driver(const Driver& other) = default;
     
     ~Driver();
 

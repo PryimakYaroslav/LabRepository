@@ -20,7 +20,7 @@ bool climateControl, bool hasAdjustableSeats, std::string interiorType) :
     interiorType(interiorType) {}
 
 Microbus::~Microbus(){
-    std::cout << "Microbus destroyed" << std::endl;
+    //std::cout << "Microbus destroyed" << std::endl;
 }
 
 void Microbus::PrintVehicleInfo() const {

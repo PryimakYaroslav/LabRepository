@@ -23,7 +23,7 @@ Vehicle::Vehicle(int id, std::string model, int countOfSeats, std::string routSt
     }
 
 Vehicle::~Vehicle(){
-        std::cout << "Info about vehicle " << id << " destroyed" << std::endl;
+        //std::cout << "Info about vehicle " << id << " destroyed" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const Vehicle& v){
@@ -61,7 +61,7 @@ Vehicle::Vehicle(const Vehicle& other) :
     run(other.run)
 {
     totalVehicles++;
-    std::cout << "Vehicle copy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
+    //std::cout << "Vehicle copy created. ID: " << id <<". Total count of vehicles: " << totalVehicles << std::endl;
 }
 
 Vehicle::Vehicle(Vehicle&& other) noexcept :
@@ -76,7 +76,7 @@ Vehicle::Vehicle(Vehicle&& other) noexcept :
     
     totalVehicles++; 
 
-    std::cout << "Vehicle moved. ID: " << id << ". Total: " << totalVehicles << std::endl;
+    //std::cout << "Vehicle moved. ID: " << id << ". Total: " << totalVehicles << std::endl;
 }
 
 void Vehicle::IncreasRun(){

@@ -21,7 +21,7 @@ Touristbus::Touristbus(int id, std::string model, int countOfSeats, std::string 
     isDoubleDeckered(isDoubleDeckered) {};
 
 Touristbus::~Touristbus(){
-    std::cout << "Touristbus destroyed" << std::endl;
+    //std::cout << "Touristbus destroyed" << std::endl;
 }
 
 Touristbus::Touristbus(const Touristbus& other) :
@@ -38,7 +38,7 @@ Touristbus::Touristbus(Touristbus&& other) noexcept :
     hasToilet(other.hasToilet),
     isDoubleDeckered(other.isDoubleDeckered)
 {
-    std::cout << "Touristbus moved." << std::endl;
+    //std::cout << "Touristbus moved." << std::endl;
 }
 
 void Touristbus::PrintVehicleInfo() const {

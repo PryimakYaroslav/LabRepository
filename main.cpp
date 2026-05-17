@@ -61,6 +61,7 @@ public:
 int main() {
     std::vector<std::shared_ptr<Vehicle>> fleet;
     std::vector<std::weak_ptr<Vehicle>> myTickets;
+    std::vector<Driver> Drivers;
 
     fleet.push_back(std::make_shared<Touristbus>(1, "Tourist Bus", 56, "Chernivtsi", "Varna", 360000, 3, false, false));
     fleet.push_back(std::make_shared<Microbus>(2, "Microbus", 32, "Lviv", "Drezden", 175000, true, true, "Classic"));
@@ -79,7 +80,7 @@ int main() {
                 std::cin.ignore(10000, '\n');
                 throw InvalidInputException();
             }
-            std::cin.ignore(10000, '\n'); // Очистка буфера після основного меню
+            std::cin.ignore(10000, '\n');
 
             if (choice == 0) break;
 
@@ -108,9 +109,8 @@ int main() {
                         }
                         std::cin.ignore(10000, '\n'); 
 
-                        // Обробка підменю Адміна
                         switch (adminChoice) {
-                            case 1: { // Додавання нового транспорту
+                            case 1: {
                                 system("cls");
                                 std::cout << "===== ADD NEW VEHICLE =====\n";
                                 std::cout << "Choose type to add:\n";
@@ -134,7 +134,6 @@ int main() {
                                     break;
                                 }
 
-                                // Загальні поля для базового класу Vehicle
                                 int id, seats;
                                 long run;
                                 std::string model, start, dest;
@@ -143,7 +142,6 @@ int main() {
                                 if (!(std::cin >> id)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
                                 std::cin.ignore(10000, '\n');
 
-                                // Валідація на унікальність ID
                                 bool idExists = false;
                                 for (const auto& v : fleet) {
                                     if (v->GetID() == id) { idExists = true; break; }
@@ -171,8 +169,7 @@ int main() {
                                 if (!(std::cin >> run)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
                                 std::cin.ignore(10000, '\n');
 
-                                // Створення об'єкта залежно від підтипу
-                                if (typeChoice == 1) { // Van
+                                if (typeChoice == 1) {
                                     double cargoCapacity;
                                     bool hasUSB, hasConditioner;
 
@@ -189,7 +186,7 @@ int main() {
                                     fleet.push_back(std::make_shared<Van>(id, model, seats, start, dest, run, cargoCapacity, hasUSB, hasConditioner));
                                     std::cout << "\n[OK] Van successfully added to the fleet!\n";
 
-                                } else if (typeChoice == 2) { // Microbus
+                                } else if (typeChoice == 2) {
                                     bool climate, adjustableSeats;
                                     std::string interior;
 
@@ -206,7 +203,7 @@ int main() {
                                     fleet.push_back(std::make_shared<Microbus>(id, model, seats, start, dest, run, climate, adjustableSeats, interior));
                                     std::cout << "\n[OK] Microbus successfully added to the fleet!\n";
 
-                                } else if (typeChoice == 3) { // Touristbus
+                                } else if (typeChoice == 3) {
                                     int screens;
                                     bool toilet, doubleDeck;
 
@@ -226,6 +223,117 @@ int main() {
 
                                 system("pause");
                                 break;
+                            }
+
+                            case 2: {
+                                system("cls");
+                                std::cout << "===== REMOVE VEHICLE BY ID =====\n";
+                                std::cout << "Enter Vehicle ID to remove: ";
+                                
+                                int idToRemove;
+                                if (!(std::cin >> idToRemove)) {
+                                    std::cin.clear();
+                                    std::cin.ignore(10000, '\n');
+                                    throw InvalidInputException();
+                                }
+                                std::cin.ignore(10000, '\n'); 
+
+                                bool found = false;
+
+                                for (size_t i = 0; i < fleet.size(); i++) {
+                                    if (fleet[i]->GetID() == idToRemove) {
+                                        fleet.erase(fleet.begin() + i); 
+                                        
+                                        std::cout << "\n[OK] Vehicle with ID " << idToRemove << " was successfully removed.\n";
+                                        found = true;
+                                        break; 
+                                    }
+                                }
+
+                                if (!found) {
+                                    throw TransportNotFoundException(idToRemove);
+                                }
+
+                                system("pause");
+                                break;
+                            }
+
+                            case 3: {
+                                system("cls");
+                                std::cout << "===== LIST OF DRIVERS =====\n";
+                                if (Drivers.empty()) {
+                                    std::cout << "No drivers registered in the system.\n";
+                                } else {
+                                    for (size_t i = 0; i < Drivers.size(); i++) {
+                                         Drivers[i].PrintDriverInfo();
+                                        std::cout << std::endl;
+                                    }
+                                }
+                                system("pause");
+                                break;
+                            }
+
+                            case 4: {
+                                system("cls");
+                                std::cout << "===== ADD NEW DRIVER =====\n";
+        
+                                int id, age, seniority, fines;
+                                std::string name;
+
+                                std::cout << "Enter Driver ID: ";
+                                if (!(std::cin >> id)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                bool driverExists = false;
+                                for (size_t i = 0; i < Drivers.size(); i++) {
+                                    if (Drivers[i].GetID() == id) { driverExists = true; break; }
+                                }
+                                if (driverExists) {
+                                    std::cout << "\n[!] Error: Driver with ID " << id << " already exists!\n";
+                                    system("pause");
+                                    break;
+                                }
+
+                                std::cout << "Enter Driver Name: ";
+                                std::getline(std::cin, name);
+
+                                std::cout << "Enter Age: ";
+                                if (!(std::cin >> age)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cout << "Enter Seniority (years): ";
+                                if (!(std::cin >> seniority)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cout << "Enter Fine Count: ";
+                                if (!(std::cin >> fines)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                Driver newDriver(id, name, age, seniority, fines, nullptr);
+
+                                std::cout << "\nDo you want to assign a vehicle to this driver now? (1 - Yes, 0 - No): ";
+                                int assignChoice;
+                                if (std::cin >> assignChoice && assignChoice == 1) {
+                                    std::cout << "Enter Vehicle ID to assign: ";
+                                    int vehicleId;
+                                    if (std::cin >> vehicleId) {
+                                        std::shared_ptr<Vehicle> foundVehicle = nullptr;
+                                        for (size_t i = 0; i < fleet.size(); i++) {
+                                            if (fleet[i]->GetID() == vehicleId) {
+                                            foundVehicle = fleet[i];
+                                            break;
+                                        }
+                                    }
+                                    if (foundVehicle != nullptr) {
+                                        newDriver.SetVehicle(foundVehicle);
+                                        std::cout << "[OK] Vehicle with ID " << vehicleId << " successfully assigned to " << name << "!\n";
+                                    } else {
+                                        std::cout << "[!] Vehicle with ID " << vehicleId << " not found. Driver created without a vehicle.\n";
+                                    }
+                                }
+                            }
+                            std::cin.ignore(10000, '\n');
+
+                            Drivers.push_back(std::move(newDriver));
+                            std::cout << "\n[OK] Driver successfully added to the system!\n";
+                            system("pause");
+                            break;
                             }
 
                             case 7:

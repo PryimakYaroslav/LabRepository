@@ -10,6 +10,8 @@ Driver::Driver() : Driver(0, "Unknown", 0, 0, 0, nullptr) {}
 
 Driver::Driver(int id, std::string DName, int DAge) : Driver(id, DName, DAge, 0, 0, nullptr) {}
 
+Driver::Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount) : Driver(id, DName, DAge, Dseniority, DfineCount, nullptr) {}
+
 Driver::Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount, std::shared_ptr<Vehicle> transport) :
     id(id),
     name(DName),
@@ -19,7 +21,7 @@ Driver::Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCou
     myVehicle(transport) {}
 
 Driver::~Driver() {
-    std::cout << "Info about driver " << name << " (ID: " << id << ") destroyed" << std::endl;
+    //std::cout << "Info about driver " << name << " (ID: " << id << ") destroyed" << std::endl;
 }
 
 Driver::Driver(Driver&& other) noexcept 
@@ -35,7 +37,7 @@ Driver::Driver(Driver&& other) noexcept
     other.seniority = 0;
     other.fineCount = 0;
     
-    std::cout << "Move constructor called for " << name << std::endl;
+    //std::cout << "Move constructor called for " << name << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& os, const Driver& d) {
@@ -47,11 +49,11 @@ std::ostream& operator<<(std::ostream& os, const Driver& d) {
     os << "Fine Count: " << d.fineCount << std::endl;
     os << "Category: " << Driver::DriverCategory << std::endl;
     
-    if (d.myVehicle) {
+    if (auto sharedVehicle = d.myVehicle.lock()) {
         os << "Vehicle Details:" << std::endl;
-        d.myVehicle->PrintVehicleInfo();
+        sharedVehicle->PrintVehicleInfo();
     } else {
-        os << "Vehicle: none" << std::endl;
+        os << "Vehicle: none(or was removed from fleet)" << std::endl;
     }
     os << "===================================";
 

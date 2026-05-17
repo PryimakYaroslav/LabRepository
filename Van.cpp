@@ -28,5 +28,5 @@ void Van::PrintVehicleInfo() const {
 }
 
 Van::~Van(){
-    std::cout << "Van destroyed" << std::endl;
+    //std::cout << "Van destroyed" << std::endl;
 }

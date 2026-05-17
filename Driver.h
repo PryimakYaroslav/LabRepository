@@ -15,11 +15,12 @@ class Driver final {
     static std::string DriverCategory;
     static int AvarageSalary;
 
-    std::shared_ptr<Vehicle> myVehicle;
+    std::weak_ptr<Vehicle> myVehicle;
 
 public:
     Driver();
     Driver(int id, std::string DName, int DAge);
+    Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount);
     Driver(int id, std::string DName, int DAge, int Dseniority, int DfineCount, std::shared_ptr<Vehicle> transport);
     
     Driver(Driver&& other) noexcept;
@@ -35,7 +36,7 @@ public:
     int GetID() const { return id; }
     std::string GetName() const { return name; }
     void SetVehicle(std::shared_ptr<Vehicle> v) { myVehicle = v; }
-    std::shared_ptr<Vehicle> GetVehicle() const { return myVehicle; }
+    std::weak_ptr<Vehicle> GetVehicle() const { return myVehicle; }
 
     static std::string GetDriverCategory();
     static int GetAvarageSalary();

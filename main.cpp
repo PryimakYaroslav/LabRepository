@@ -358,7 +358,6 @@ int main() {
                                     if (Drivers[i].GetID() == idToRemove) {
                                         std::cout << "\n[Notice] Driver " << Drivers[i].GetName() << " is being removed...\n";
                                         
-                                        // Видалення за індексом
                                         Drivers.erase(Drivers.begin() + i); 
                                         
                                         std::cout << "[OK] Driver with ID " << idToRemove << " was successfully removed.\n";
@@ -369,6 +368,74 @@ int main() {
 
                                 if (!found) {
                                     std::cout << "\n[!] Error: Driver with ID " << idToRemove << " was not found in the system.\n";
+                                }
+
+                                system("pause");
+                                break;
+                            }
+
+                            case 6: {
+                                system("cls");
+                                std::cout << "===== CHANGE VEHICLE OWNER =====\n";
+                                
+                                if (Drivers.empty() || fleet.empty()) {
+                                    std::cout << "[!] Error: Drivers list or Vehicle fleet is empty!\n";
+                                    system("pause");
+                                    break;
+                                }
+
+                                int driverId, vehicleId;
+                                std::cout << "Enter Driver ID: ";
+                                if (!(std::cin >> driverId)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                
+                                std::cout << "Enter Vehicle ID: ";
+                                if (!(std::cin >> vehicleId)) { std::cin.clear(); std::cin.ignore(10000, '\n'); throw InvalidInputException(); }
+                                std::cin.ignore(10000, '\n');
+
+                                std::shared_ptr<Vehicle> targetVehicle = nullptr;
+                                for (const auto& v : fleet) {
+                                    if (v->GetID() == vehicleId) {
+                                        targetVehicle = v;
+                                        break;
+                                    }
+                                }
+
+                                if (!targetVehicle) {
+                                    std::cout << "\n[!] Error: Vehicle with ID " << vehicleId << " not found!\n";
+                                    system("pause");
+                                    break;
+                                }
+
+                                bool isAlreadyTaken = false;
+                                for (size_t i = 0; i < Drivers.size(); i++) {
+                                    if (auto vShared = Drivers[i].GetVehicle().lock()) {
+                                        if (vShared->GetID() == targetVehicle->GetID()) {
+                                            std::cout << "\n[!] Error: This vehicle is already assigned to driver: " 
+                                                      << Drivers[i].GetName() << " (ID: " << Drivers[i].GetID() << ")\n";
+                                            isAlreadyTaken = true;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (isAlreadyTaken) {
+                                    system("pause");
+                                    break;
+                                }
+
+                                // 3. Якщо вільне — шукаємо водія та закріплюємо авто
+                                bool driverFound = false;
+                                for (size_t i = 0; i < Drivers.size(); i++) {
+                                    if (Drivers[i].GetID() == driverId) {
+                                        Drivers[i].SetVehicle(targetVehicle);
+                                        std::cout << "\n[OK] Vehicle ID " << vehicleId << " successfully assigned to " << Drivers[i].GetName() << "\n";
+                                        driverFound = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!driverFound) {
+                                    std::cout << "\n[!] Error: Driver with ID " << driverId << " not found!\n";
                                 }
 
                                 system("pause");

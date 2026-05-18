@@ -41,6 +41,8 @@ void showAdminMenu() {
 
 class InvalidInputException : public std::exception {
 public:
+    InvalidInputException() = default;
+    ~InvalidInputException() = default;
     const char* what() const noexcept override {
         return "Invalid input! Enter a valid number for the menu.";
     }
@@ -49,6 +51,8 @@ public:
 class TransportNotFoundException : public std::exception {
     std::string message;
 public:
+    TransportNotFoundException() = default;
+    ~TransportNotFoundException() = default;
     TransportNotFoundException(int id) {
         message = "Error: Vehicle with ID " + std::to_string(id) + " was not found in our fleet";
     }
@@ -423,7 +427,6 @@ int main() {
                                     break;
                                 }
 
-                                // 3. Якщо вільне — шукаємо водія та закріплюємо авто
                                 bool driverFound = false;
                                 for (size_t i = 0; i < Drivers.size(); i++) {
                                     if (Drivers[i].GetID() == driverId) {
